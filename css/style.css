@@ -1,0 +1,483 @@
+/* style.css */
+
+/* Base styles and Typography */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Changed font to Battambang */
+  font-family: "Battambang", sans-serif;
+  color: #333;
+  background-color: #f8f8f8;
+}
+/* Removed old Khmer font declarations as Battambang is now global */
+/* .khmer-text {
+  font-family: "Khmer OS Siemreap", "Noto Sans Khmer", sans-serif;
+} */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Bayon", cursive; /* Kept Bayon for headings as it was desired */
+  color: #2d3748;
+  /* Darker gray for headings */
+}
+
+/* Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(3deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Specific delays for background elements to create a staggered effect */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+/* Fade-in animation for sections that come into view */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Initial state for hidden sections */
+.hidden-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  /* Smooth transition for fade-in */
+}
+
+/* Class added by JS when section is in view */
+.show-section {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Slide-in animation for hero text/buttons */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.8s ease-out forwards;
+}
+
+/* Navigation Link Underline Effect */
+.nav-link .relative span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px; /* Adjust as needed */
+  width: 0;
+  height: 2px;
+  background-color: #10b981; /* Tailwind emerald-500 */
+  transition: width 0.3s ease-out;
+}
+
+.nav-link:hover .relative span::after {
+  width: 100%;
+}
+
+/* Specific styles for the sticky navbar */
+.navbar-scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Modal animations for primary donation modal */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Classes for modal show/hide */
+.modal-show #modal-content {
+  animation: modalFadeIn 0.3s ease-out forwards;
+}
+
+.modal-hide #modal-content {
+  animation: modalFadeOut 0.3s ease-out forwards;
+}
+
+.modal-hide {
+  pointer-events: none; /* Prevent interaction while fading out */
+}
+
+/* Hide scrollbar for elements with overflow, but still allow scrolling */
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+/* Ensure smooth transitions for various interactive elements */
+a,
+button,
+input,
+select,
+textarea {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Custom styles for input/textarea focus states */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3); /* Emerald-500 with opacity */
+  border-color: #10b981; /* Emerald-500 */
+}
+
+/* Style for error messages */
+p[role="alert"] {
+  color: #ef4444; /* rose-500 */
+  font-size: 0.875rem; /* text-sm */
+  margin-top: 0.25rem; /* mt-1 */
+}
+
+/* General improvements for readability and spacing */
+.max-w-7xl {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .md\:px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+/* Styling for the current slide indicator in carousel */
+[data-carousel-indicators] button[aria-current="true"] {
+  background-color: #10b981; /* emerald-500 */
+}
+
+[data-carousel-indicators] button {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid #ffffff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+[data-carousel-indicators] button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.1);
+}
+
+/* Back to top button styling */
+#back-to-top {
+  transform: scale(0); /* Hidden by default */
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#back-to-top.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Accessibility: Focus outline for better navigation */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #10b981; /* emerald-600 */
+  outline-offset: 2px;
+}
+
+/* Footer copyright year font size */
+#current-year {
+  font-family: "Battambang", sans-serif; /* Keep consistent with body font */
+}
+
+/* Custom shadow for image hover */
+.shadow-3xl {
+  box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+}
+
+/* FAQ accordion icon rotation */
+.faq-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* Toast notification */
+#copyToast {
+  animation: slideInFadeOut 4s forwards;
+}
+
+@keyframes slideInFadeOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* --- NEW STYLES FOR INTEGRATED PAYMENT FORM (FROM IMMERSIVE) --- */
+
+/* Modal content background and shadow */
+#donation-modal #modal-content {
+  background: linear-gradient(
+    135deg,
+    #f0f4f8 0%,
+    #d9e2ec 100%
+  ); /* Soft, subtle gradient background */
+  border-radius: 1.5rem; /* Even more rounded corners */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15),
+    0 15px 30px -10px rgba(0, 0, 0, 0.08); /* Deeper, softer shadow */
+  border: 2px solid #e0e7eb; /* Subtle light gray border */
+  max-height: 90vh; /* Ensure it doesn't exceed viewport height */
+  overflow-y: auto; /* Enable scrolling for content if needed */
+}
+
+/* Input field base styles */
+.input-field {
+  border: 1px solid #cbd5e1; /* Neutral light gray border */
+  border-radius: 0.75rem; /* More rounded inputs */
+  padding: 0.85rem 1.25rem; /* Comfortable padding */
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.6rem;
+  margin-bottom: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother cubic-bezier transition */
+  background-color: #f8fafc; /* Very subtle off-white input background */
+  font-size: 1rem; /* Consistent font size */
+  color: #334155; /* Darker text for readability */
+}
+
+/* Input field focus styles */
+.input-field:focus {
+  outline: none;
+  border-color: #6366f1; /* Deeper indigo border on focus */
+  box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.2); /* Soft indigo shadow on focus */
+  background-color: #ffffff; /* Pure white background on focus */
+}
+
+/* Payment method tabs container */
+.payment-tabs-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+  gap: 0.5rem; /* Space between tabs */
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem; /* Space for bottom border */
+  border-bottom: 2px solid #e2e8f0; /* Subtle separator line */
+}
+
+/* Individual payment tab styling */
+.payment-tab {
+  flex-grow: 1; /* Allow tabs to grow and fill space */
+  text-align: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.65rem 0.65rem 0 0; /* Rounded top corners only */
+  font-weight: 600;
+  color: #64748b; /* Slate gray for inactive tabs */
+  background-color: #f1f5f9; /* Lighter background for inactive */
+  border: 1px solid #e2e8f0;
+  border-bottom: none; /* No bottom border for inactive tabs */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflow if flex-grow doesn't work perfectly */
+  text-overflow: ellipsis; /* Add ellipsis if text overflows */
+  position: relative; /* Added to ensure proper z-indexing */
+  z-index: 1; /* Ensure it's above content below it when inactive too */
+}
+
+.payment-tab.active {
+  color: #4f46e5; /* Dark indigo for active tab */
+  background-color: #ffffff; /* White background for active tab */
+  border-color: #6366f1; /* Indigo border for active tab */
+  border-bottom: 2px solid #ffffff; /* Creates overlap effect with container border */
+  z-index: 10; /* Bring active tab to front */
+  font-weight: 700;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow on active tab */
+}
+
+.payment-tab:hover:not(.active) {
+  background-color: #e2e8f0; /* Slightly darker hover for inactive */
+  color: #475569; /* Darker text on hover for inactive */
+}
+
+/* Payment details sections */
+.payment-details-section {
+  background-color: #ffffff; /* White background for content area */
+  padding: 1.5rem;
+  border-radius: 0.85rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Soft shadow */
+  margin-top: -1rem; /* Adjust to slightly overlap with tabs */
+  padding-top: 2.5rem; /* Add space at the top due to negative margin */
+}
+
+/* Confirmation screens */
+.confirmation-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 5px 10px -5px rgba(0, 0, 0, 0.08);
+  border: 2px solid #d1d5db; /* Light gray border for confirmation */
+}
+
+/* Action button (Continue, Fantastic!) */
+.action-button {
+  width: 100%;
+  padding: 1.2rem;
+  background: linear-gradient(
+    45deg,
+    #6366f1,
+    #4f46e5
+  ); /* Dynamic indigo gradient */
+  color: white;
+  border-radius: 0.85rem;
+  font-weight: 800;
+  font-size: 1.1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.4),
+    0 8px 12px -5px rgba(99, 102, 241, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  position: relative;
+  overflow: hidden;
+  margin-top: 1.5rem; /* Spacing for the button */
+}
+
+.action-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: skewX(-30deg);
+  transition: all 0.5s ease-in-out;
+}
+
+.action-button:hover::before {
+  left: 100%;
+}
+
+.action-button:hover {
+  background: linear-gradient(
+    45deg,
+    #4f46e5,
+    #4338ca
+  ); /* Darker gradient on hover */
+  transform: translateY(-4px) scale(1.01); /* More pronounced lift and slight scale */
+  box-shadow: 0 20px 35px -8px rgba(99, 102, 241, 0.5),
+    0 10px 15px -7px rgba(99, 102, 241, 0.3); /* Even stronger shadow on hover */
+}
+
+/* Specific colors for success/error messages */
+.message-box button {
+  background: linear-gradient(
+    45deg,
+    #10b981,
+    #059669
+  ); /* Green gradient for success */
+  box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.3);
+}
+
+.message-box button:hover {
+  background: linear-gradient(45deg, #059669, #047857);
+  box-shadow: 0 12px 25px -5px rgba(16, 185, 129, 0.4);
+}
+
+/* Responsive adjustments for tabs */
+@media (max-width: 640px) {
+  .payment-tabs-container {
+    flex-direction: column; /* Stack tabs vertically on small screens */
+    border-bottom: none; /* Remove bottom border when stacked */
+  }
+  .payment-tab {
+    border-radius: 0.65rem; /* Full rounded corners when stacked */
+    margin-bottom: 0.5rem; /* Space between stacked tabs */
+    border-bottom: 1px solid #e2e8f0; /* Add bottom border back to individual tab */
+  }
+  .payment-tab.active {
+    border-bottom: 1px solid #6366f1; /* Maintain border for active tab */
+  }
+  .payment-details-section {
+    margin-top: 0; /* No negative margin when tabs are stacked */
+    border-top-left-radius: 0.85rem; /* Ensure proper corner on top-left */
+    border-top-right-radius: 0.85rem; /* Ensure proper corner on top-right */
+  }
+}
